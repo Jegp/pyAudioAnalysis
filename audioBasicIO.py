@@ -90,13 +90,7 @@ def readAudioFile(path):
     try:
         # if extension.lower() == '.wav':
             #[Fs, x] = wavfile.read(path)
-        if extension.lower() == '.aif' or extension.lower() == '.aiff':
-            s = aifc.open(path, 'r')
-            nframes = s.getnframes()
-            strsig = s.readframes(nframes)
-            x = numpy.fromstring(strsig, numpy.short).byteswap()
-            Fs = s.getframerate()
-        elif extension.lower() == '.mp3' or extension.lower() == '.wav' or extension.lower() == '.au':
+        if extension.lower() == '.mp3' or extension.lower() == '.wav' or extension.lower() == '.au':
             try:
                 audiofile = AudioSegment.from_file(path)
             # except pydub.exceptions.CouldntDecodeError:
@@ -115,6 +109,12 @@ def readAudioFile(path):
             for chn in range(audiofile.channels):
                 x.append(data[chn::audiofile.channels])
             x = numpy.array(x).T
+        elif extension.lower() == '.aif' or extension.lower() == '.aiff':
+            s = aifc.open(path, 'r')
+            nframes = s.getnframes()
+            strsig = s.readframes(nframes)
+            x = numpy.fromstring(strsig, numpy.short).byteswap()
+            Fs = s.getframerate()
         else:
             print("Error in readAudioFile(): Unknown file type!")
             return (-1, -1)

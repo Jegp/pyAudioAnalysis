@@ -19,8 +19,8 @@ from matplotlib.mlab import find
 from scipy import linalg as la
 from scipy.spatial import distance
 
-import audioBasicIO
-import audioFeatureExtraction as aF
+from . import audioBasicIO
+from . import audioFeatureExtraction as aF
 
 
 def signal_handler(signal, frame):
@@ -542,9 +542,6 @@ def loadKNNModel(kNNModelName, isRegression=False):
         stWin = cPickle.load(fo)
         stStep = cPickle.load(fo)
         computeBEAT = cPickle.load(fo)
-        print(MEAN)
-        print(STD)
-        print(mtWin, mtStep, stWin, stStep, computeBEAT)
     except:
         fo.close()
     fo.close()
@@ -1146,7 +1143,6 @@ def lda(data, labels, redDim):
     data -= data.mean(axis=0)
     nData = numpy.shape(data)[0]
     nDim = numpy.shape(data)[1]
-    print(nData, nDim)
     Sw = numpy.zeros((nDim, nDim))
     Sb = numpy.zeros((nDim, nDim))
 

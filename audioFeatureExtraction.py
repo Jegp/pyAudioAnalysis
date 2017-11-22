@@ -17,9 +17,9 @@ from scipy.fftpack.realtransforms import dct
 from scipy.signal import fftconvolve
 from scipy.signal import lfilter, hamming
 
-import audioBasicIO
-import audioTrainTest as aT
-import utilities
+from . import audioBasicIO
+from . import audioTrainTest as aT
+from . import utilities
 #from scikits.talkbox import lpc
 
 # reload(sys)
@@ -765,7 +765,7 @@ def dirWavFeatureExtraction(dirName, mtWin, mtStep, stWin, stStep, computeBEAT=F
     wavFilesList = sorted(wavFilesList)
     wavFilesList2 = []
     for i, wavFile in enumerate(wavFilesList):
-        print("Analyzing file {0:d} of {1:d}: {2:s}".format(
+        print("Analyzing file {0} of {1}: {2}".format(
             i + 1, len(wavFilesList), wavFile.encode('utf-8')))
         if os.stat(wavFile).st_size == 0:
             print("   (EMPTY FILE -- SKIPPING)")
